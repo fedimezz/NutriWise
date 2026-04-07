@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mot de passe oublié - NutriWise</title>
-    <link rel="stylesheet" href="motpasse.css">
+    <link rel="stylesheet" href="./assets/css/motpasse.css">
 </head>
 <body>
     <div class="container">
@@ -16,7 +16,7 @@
             <h1>Mot de passe oublié ?</h1>
             <p class="subtitle">Entrez votre numéro de téléphone pour recevoir un code de réinitialisation</p>
 
-            <form action="#" method="POST">
+            <form action="index.php?page=motpasse" method="POST">
                 <div class="form-group">
                     <label>Numéro de téléphone</label>
                     <div class="phone-wrapper">
@@ -30,7 +30,7 @@
                             <option value="+212">🇲🇦 +212</option>
                             <option value="+216">🇹🇳 +216</option>
                         </select>
-                        <input type="tel" name="phoneNumber" placeholder="6 12 34 56 78" autocomplete="off">
+                        <input type="tel" name="phoneNumber" placeholder="6 12 34 56 78" autocomplete="off" required>
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
             </form>
 
             <div class="back-link">
-                <a href="login.html">← Retour à la connexion</a>
+                <a href="index.php?page=login">← Retour à la connexion</a>
             </div>
         </div>
     </div>
