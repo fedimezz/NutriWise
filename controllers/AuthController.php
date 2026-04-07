@@ -38,12 +38,17 @@ class AuthController {
             if(!empty($email) && !empty($password)) {
                 $user = $this->userModel->login($email, $password);
                 if($user) {
+                    // Stockage des informations en session
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_role'] = $user['role'] ?? 'user';
                     $_SESSION['user_name'] = $user['prenom'] . ' ' . $user['nom'];
                     
-                    // Redirection vers l'accueil après connexion
-                    header("Location: index.php?page=home&success=Bonjour " . $user['prenom'] . " !");
+                    // REDIRECTION SELON LE RÔLE
+                    if($_SESSION['user_role'] === 'admin') {
+                        header("Location: index.php?page=admin_dashboard");
+                    } else {
+                        header("Location: index.php?page=home&success=Bonjour " . $user['prenom']);
+                    }
                     exit();
                 } else {
                     $error = "Email ou mot de passe incorrect.";
@@ -57,7 +62,7 @@ class AuthController {
 
     public function logout() {
         session_destroy();
-        header("Location: index.php?page=home&success=Vous êtes déconnecté");
+        header("Location: index.php?page=home");
         exit();
     }
 }

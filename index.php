@@ -8,13 +8,14 @@ require_once 'controllers/UserController.php';
 require_once 'controllers/AdminController.php';
 require_once 'controllers/AlimentController.php';
 
-// On récupère la page demandée, sinon on affiche l'accueil (home) par défaut
+// On récupère la page demandée, sinon 'home'
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 switch ($page) {
-    // --- PAGES FRONTEND ---
+    // --- FRONTEND ---
     case 'home':
-        require_once 'views/front/index.php';
+        // On inclut la vue de la page d'accueil
+        require_once 'views/front/index.php'; 
         break;
 
     case 'login':
@@ -32,26 +33,22 @@ switch ($page) {
         $auth->logout();
         break;
 
-    case 'motpasse':
-        require_once 'views/front/motpasse.php';
-        break;
-
     case 'profile':
         $user = new UserController();
         $user->profile();
         break;
-    // --- FRONT ALIMENTS ---
+
     case 'aliments':
-    $alimentController = new AlimentController();
-    $alimentController->frontList();
-    break;
+        $alimentController = new AlimentController();
+        $alimentController->frontList();
+        break;
 
     case 'aliment_details':
-    $alimentController = new AlimentController();
-    $alimentController->details();
-    break;
+        $alimentController = new AlimentController();
+        $alimentController->details();
+        break;
 
-    // --- PAGES BACKEND ---
+    // --- BACKEND (ADMIN) ---
     case 'admin_dashboard':
         $admin = new AdminController();
         $admin->dashboard();
@@ -62,22 +59,6 @@ switch ($page) {
         $admin->listUsers();
         break;
 
-    case 'admin_add_user':
-        $admin = new AdminController();
-        $admin->addUser();
-        break;
-
-    case 'admin_edit_user':
-        $admin = new AdminController();
-        $admin->editUser();
-        break;
-
-    case 'admin_delete_user':
-        $admin = new AdminController();
-        $admin->deleteUser();
-        break;
-
-    // --- NOUVEAU : ALIMENTS ---
     case 'admin_aliments':
         $alimentController = new AlimentController();
         $alimentController->listAliments();
@@ -92,18 +73,14 @@ switch ($page) {
         $alimentController = new AlimentController();
         $alimentController->deleteAliment();
         break;
-    case 'admin_edit_aliment':
-    $alimentController = new AlimentController();
-    $alimentController->editAliment();
-    break;
 
-    // --- ERREUR 404 ---
+    case 'admin_edit_aliment':
+        $alimentController = new AlimentController();
+        $alimentController->editAliment();
+        break;
+
     default:
-        echo "<div style='text-align:center; padding:50px; font-family:sans-serif;'>";
-        echo "<h1>Erreur 404 - Page introuvable</h1>";
-        echo "<p>Le routeur ne trouve pas la page : <b>" . htmlspecialchars($page) . "</b></p>";
-        echo "<a href='index.php' style='color:blue; text-decoration:none;'>⬅ Retour à l'accueil</a>";
-        echo "</div>";
+        header("HTTP/1.0 404 Not Found");
+        echo "Page introuvable.";
         break;
 }
-?>
