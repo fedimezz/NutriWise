@@ -36,7 +36,7 @@ class Recette {
     }
 
     public function readPublished() {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE statut = 'Publié' ORDER BY id DESC";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE statut = 'Publie' ORDER BY id DESC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

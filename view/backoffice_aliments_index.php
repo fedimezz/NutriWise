@@ -26,12 +26,12 @@
 <body>
     <div class="container">
         <div class="top-links">
-            <a href="index.php?area=back">← Dashboard</a> | 
-            <a href="index.php">Voir le site public</a>
+            <a href="../controller/index.php?area=back">← Dashboard</a> | 
+            <a href="../controller/index.php">Voir le site public</a>
         </div>
         
         <h1>🥗 Gestion des aliments</h1>
-        <a href="index.php?controller=aliment&action=create&area=back" class="btn-add">+ Ajouter un aliment</a>
+        <a href="../controller/index.php?controller=aliment&action=create&area=back" class="btn-add">+ Ajouter un aliment</a>
         
         <?php if(isset($_GET['success'])): ?>
             <div class="success">Opération réussie !</div>
@@ -44,7 +44,7 @@
             <input type="text" name="search" placeholder="Rechercher un aliment..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
             <button type="submit">🔍 Rechercher</button>
             <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-                <a href="index.php?controller=aliment&action=index&area=back" style="background:#666; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Annuler</a>
+                <a href="../controller/index.php?controller=aliment&action=index&area=back" style="background:#666; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Annuler</a>
             <?php endif; ?>
         </form>
         
@@ -61,8 +61,8 @@
                         <td><?= $a['eco_score'] ?></td>
                         <td><?= $a['saison'] ?></td>
                         <td>
-                            <a href="index.php?controller=aliment&action=edit&id=<?= $a['id'] ?>&area=back" class="btn-edit">✏️ Modifier</a>
-                            <a href="index.php?controller=aliment&action=delete&id=<?= $a['id'] ?>&area=back" class="btn-delete" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</a>
+                            <a href="../controller/index.php?controller=aliment&action=edit&id=<?= $a['id'] ?>&area=back" class="btn-edit">✏️ Modifier</a>
+                            <a href="../controller/index.php?controller=aliment&action=delete&id=<?= $a['id'] ?>&area=back" class="btn-delete" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -73,7 +73,7 @@
         </table>
         
         <div class="back-link">
-            <a href="index.php?area=back">← Retour au Dashboard</a>
+            <a href="../controller/index.php?area=back">← Retour au Dashboard</a>
         </div>
     </div>
 </body>

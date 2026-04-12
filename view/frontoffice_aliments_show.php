@@ -13,8 +13,10 @@
         .nav-links a { color: white; text-decoration: none; padding: 8px 16px; border-radius: 8px; }
         .nav-links a:hover { background: #4CAF50; }
         .auth-buttons { display: flex; gap: 10px; }
-        .btn-login { background: transparent; border: 1px solid white; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; }
-        .btn-register { background: #4CAF50; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; }
+        .btn-login { background: transparent; border: 1px solid white; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
+        .btn-login:hover { background: white; color: #1B4D1B; }
+        .btn-register { background: #4CAF50; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
+        .btn-register:hover { background: #2E7D32; }
         .food-detail { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h1 { color: #2E7D32; margin-bottom: 10px; }
         .eco-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; margin: 10px 0; }
@@ -38,9 +40,9 @@
         <nav class="navbar">
             <div class="logo"><span>🌿</span><span>NutriWise</span></div>
             <div class="nav-links">
-                <a href="index.php">Accueil</a>
-                <a href="index.php?controller=aliment&action=index&area=front">Aliments</a>
-                <a href="index.php?controller=recette&action=index&area=front">Recettes</a>
+                <a href="../controller/index.php">Accueil</a>
+                <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
+                <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
@@ -50,7 +52,7 @@
         </nav>
 
         <div class="back-link">
-            <a href="index.php?controller=aliment&action=index&area=front">← Retour aux aliments</a>
+            <a href="../controller/index.php?controller=aliment&action=index&area=front">← Retour aux aliments</a>
         </div>
 
         <div class="food-detail">
@@ -60,4 +62,18 @@
             <p>Saison : <?= $aliment['saison'] ?></p>
 
             <table class="nutrition-table">
-                <tr><td>🔥 Calories (kcal/100g)
+                <tr><td>🔥 Calories (kcal/100g)</td><td><?= $aliment['calories'] ?></td></tr>
+                <tr><td>🥩 Protéines (g/100g)</td><td><?= $aliment['proteins'] ?></td></tr>
+                <tr><td>🍚 Glucides (g/100g)</td><td><?= $aliment['glucides'] ?></td></tr>
+                <tr><td>🧈 Lipides (g/100g)</td><td><?= $aliment['lipids'] ?></td></tr>
+            </table>
+            
+            <a href="../controller/index.php?controller=aliment&action=index&area=front" class="btn-back">← Retour aux aliments</a>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 NutriWise - Nutrition intelligente et durable</p>
+        </div>
+    </div>
+</body>
+</html>

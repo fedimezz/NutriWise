@@ -27,12 +27,12 @@
 <body>
     <div class="container">
         <div class="top-links">
-            <a href="index.php?area=back">← Dashboard</a> | 
-            <a href="index.php">Voir le site public</a>
+            <a href="../controller/index.php?area=back">← Dashboard</a> | 
+            <a href="../controller/index.php">Voir le site public</a>
         </div>
         
         <h1>📖 Gestion des recettes</h1>
-        <a href="index.php?controller=recette&action=create&area=back" class="btn-add">+ Ajouter une recette</a>
+        <a href="../controller/index.php?controller=recette&action=create&area=back" class="btn-add">+ Ajouter une recette</a>
         
         <?php if(isset($_GET['success'])): ?>
             <div class="success">Opération réussie !</div>
@@ -45,7 +45,7 @@
             <input type="text" name="search" placeholder="Rechercher une recette..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
             <button type="submit">🔍 Rechercher</button>
             <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-                <a href="index.php?controller=recette&action=index&area=back" style="background:#666; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Annuler</a>
+                <a href="../controller/index.php?controller=recette&action=index&area=back" style="background:#666; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Annuler</a>
             <?php endif; ?>
         </form>
         
@@ -60,11 +60,11 @@
                         <td><?= $r['difficulte'] ?></td>
                         <td><?= $r['saison'] ?></td>
                         <td><?= $r['duree'] ?> min</td>
-                        <td><span class="<?= $r['statut'] == 'Publié' ? 'badge-published' : 'badge-draft' ?>"><?= $r['statut'] == 'Publié' ? 'Publié' : 'Brouillon' ?></span></td>
+                        <td><span class="<?= $r['statut'] == 'Publié' ? 'badge-published' : 'badge-draft' ?>"><?= $r['statut'] ?></span></td>
                         <td>⭐ <?= $r['score_durabilite'] ?></td>
                         <td>
-                            <a href="index.php?controller=recette&action=edit&id=<?= $r['id'] ?>&area=back" class="btn-edit">✏️ Modifier</a>
-                            <a href="index.php?controller=recette&action=delete&id=<?= $r['id'] ?>&area=back" class="btn-delete" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</a>
+                            <a href="../controller/index.php?controller=recette&action=edit&id=<?= $r['id'] ?>&area=back" class="btn-edit">✏️ Modifier</a>
+                            <a href="../controller/index.php?controller=recette&action=delete&id=<?= $r['id'] ?>&area=back" class="btn-delete" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

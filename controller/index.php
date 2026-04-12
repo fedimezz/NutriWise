@@ -3,8 +3,8 @@ session_start();
 
 spl_autoload_register(function($class) {
     $paths = [
-        __DIR__ . '/model/' . $class . '.php',
-        __DIR__ . '/controller/' . $class . '.php'
+        __DIR__ . '/../model/' . $class . '.php',
+        __DIR__ . '/../controller/' . $class . '.php'
     ];
     foreach($paths as $path) {
         if(file_exists($path)) {
@@ -24,15 +24,19 @@ if($controller_name == 'aliment') {
     if(method_exists($controller, $action)) {
         if($id) $controller->$action($id, $area);
         else $controller->$action($area);
+    } else {
+        echo "Action non trouvée : " . $action;
     }
 } elseif($controller_name == 'recette') {
     $controller = new RecetteController();
     if(method_exists($controller, $action)) {
         if($id) $controller->$action($id, $area);
         else $controller->$action($area);
+    } else {
+        echo "Action non trouvée : " . $action;
     }
 } else {
-    if($area == 'back') require_once __DIR__ . '/view/backoffice_dashboard.php';
-    else require_once __DIR__ . '/view/frontoffice_accueil.php';
+    if($area == 'back') require_once __DIR__ . '/../view/backoffice_dashboard.php';
+    else require_once __DIR__ . '/../view/frontoffice_accueil.php';
 }
 ?>

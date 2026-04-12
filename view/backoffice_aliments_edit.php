@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <div class="top-link">
-            <a href="index.php?controller=aliment&action=index&area=back">← Retour à la liste</a>
+            <a href="../controller/index.php?controller=aliment&action=index&area=back">← Retour à la liste</a>
         </div>
         
         <h1>✏️ Modifier l'aliment</h1>
@@ -32,7 +32,7 @@
             <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
         
-        <form method="POST" action="index.php?controller=aliment&action=update&id=<?= $aliment['id'] ?>&area=back">
+        <form method="POST" action="../controller/index.php?controller=aliment&action=update&id=<?= $aliment['id'] ?>&area=back">
             <label>Nom *</label>
             <input type="text" name="nom" value="<?= htmlspecialchars($aliment['nom']) ?>">
             
@@ -76,7 +76,7 @@
             <label><input type="checkbox" name="durable" value="1" <?= $aliment['durable'] ? 'checked' : '' ?>> Aliment durable ?</label>
             
             <button type="submit">Enregistrer</button>
-            <a href="index.php?controller=aliment&action=index&area=back" class="btn-back">Annuler</a>
+            <a href="../controller/index.php?controller=aliment&action=index&area=back" class="btn-back">Annuler</a>
         </form>
     </div>
 </body>

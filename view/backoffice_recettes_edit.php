@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <div class="top-link">
-            <a href="index.php?controller=recette&action=index&area=back">← Retour à la liste</a>
+            <a href="../controller/index.php?controller=recette&action=index&area=back">← Retour à la liste</a>
         </div>
         
         <h1>✏️ Modifier la recette</h1>
@@ -32,7 +32,7 @@
             <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
         
-        <form method="POST" action="index.php?controller=recette&action=update&id=<?= $recette['id'] ?>&area=back">
+        <form method="POST" action="../controller/index.php?controller=recette&action=update&id=<?= $recette['id'] ?>&area=back">
             <label>Titre *</label>
             <input type="text" name="title" value="<?= htmlspecialchars($recette['title']) ?>">
             
@@ -75,7 +75,7 @@
             </select>
             
             <button type="submit">Enregistrer</button>
-            <a href="index.php?controller=recette&action=index&area=back" class="btn-back">Annuler</a>
+            <a href="../controller/index.php?controller=recette&action=index&area=back" class="btn-back">Annuler</a>
         </form>
     </div>
 </body>

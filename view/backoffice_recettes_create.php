@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <div class="top-link">
-            <a href="index.php?controller=recette&action=index&area=back">← Retour à la liste</a>
+            <a href="../controller/index.php?controller=recette&action=index&area=back">← Retour à la liste</a>
         </div>
         
         <h1>➕ Ajouter une recette</h1>
@@ -32,7 +32,7 @@
             <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
         
-        <form method="POST" action="index.php?controller=recette&action=store&area=back">
+        <form method="POST" action="../controller/index.php?controller=recette&action=store&area=back">
             <label>Titre *</label>
             <input type="text" name="title" value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
             
@@ -66,7 +66,7 @@
             </select>
             
             <button type="submit">Créer la recette</button>
-            <a href="index.php?controller=recette&action=index&area=back" class="btn-back">Annuler</a>
+            <a href="../controller/index.php?controller=recette&action=index&area=back" class="btn-back">Annuler</a>
         </form>
     </div>
 </body>

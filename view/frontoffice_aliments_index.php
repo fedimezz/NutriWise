@@ -10,11 +10,13 @@
         .navbar { background: #1B4D1B; padding: 15px 30px; border-radius: 12px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
         .navbar .logo { color: white; font-size: 24px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
         .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
-        .nav-links a { color: white; text-decoration: none; padding: 8px 16px; border-radius: 8px; transition: background 0.3s; }
+        .nav-links a { color: white; text-decoration: none; padding: 8px 16px; border-radius: 8px; transition: background 0.3s; cursor: pointer; }
         .nav-links a:hover, .nav-links a.active { background: #4CAF50; }
         .auth-buttons { display: flex; gap: 10px; }
-        .btn-login { background: transparent; border: 1px solid white; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; }
-        .btn-register { background: #4CAF50; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; }
+        .btn-login { background: transparent; border: 1px solid white; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
+        .btn-login:hover { background: white; color: #1B4D1B; }
+        .btn-register { background: #4CAF50; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
+        .btn-register:hover { background: #2E7D32; }
         h1 { color: #2E7D32; margin-bottom: 10px; }
         .search-box { margin: 20px 0; display: flex; gap: 10px; }
         .search-box input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
@@ -42,9 +44,9 @@
         <nav class="navbar">
             <div class="logo"><span>🌿</span><span>NutriWise</span></div>
             <div class="nav-links">
-                <a href="index.php">Accueil</a>
-                <a href="index.php?controller=aliment&action=index&area=front" class="active">Aliments</a>
-                <a href="index.php?controller=recette&action=index&area=front">Recettes</a>
+                <a href="../controller/index.php">Accueil</a>
+                <a href="../controller/index.php?controller=aliment&action=index&area=front" class="active">Aliments</a>
+                <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
@@ -54,7 +56,7 @@
         </nav>
 
         <div class="back-link">
-            <a href="index.php">← Retour à l'accueil</a>
+            <a href="../controller/index.php">← Retour à l'accueil</a>
         </div>
 
         <h1>🥗 Notre base de données alimentaire</h1>
@@ -67,7 +69,7 @@
             <input type="text" name="search" placeholder="Rechercher un aliment..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
             <button type="submit">🔍 Rechercher</button>
             <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-                <a href="index.php?controller=aliment&action=index&area=front" style="background:#666; color:white; padding:12px 25px; text-decoration:none; border-radius:5px;">Annuler</a>
+                <a href="../controller/index.php?controller=aliment&action=index&area=front" style="background:#666; color:white; padding:12px 25px; text-decoration:none; border-radius:5px;">Annuler</a>
             <?php endif; ?>
         </form>
 
@@ -88,14 +90,14 @@
                     <div>L: <?= $a['lipids'] ?>g</div>
                 </div>
                 <div><span class="eco-<?= $a['eco_score'] ?>">🌱 Eco-Score <?= $a['eco_score'] ?></span></div>
-                <a href="index.php?controller=aliment&action=show&id=<?= $a['id'] ?>" class="btn-detail">Voir le détail →</a>
+                <a href="../controller/index.php?controller=aliment&action=show&id=<?= $a['id'] ?>" class="btn-detail">Voir le détail →</a>
             </div>
             <?php endforeach; ?>
         </div>
         <?php else: ?>
             <div class="no-results">
                 <p>Aucun aliment trouvé pour "<strong><?= htmlspecialchars($_GET['search'] ?? '') ?></strong>"</p>
-                <a href="index.php?controller=aliment&action=index&area=front">Voir tous les aliments</a>
+                <a href="../controller/index.php?controller=aliment&action=index&area=front">Voir tous les aliments</a>
             </div>
         <?php endif; ?>
 
