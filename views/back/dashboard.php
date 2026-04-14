@@ -19,7 +19,7 @@
                 <a href="index.php?page=admin_users">👥 Utilisateurs</a>
                 <a href="index.php?page=admin_aliments" class="<?= ($page=='admin_aliments') ? 'active' : '' ?>">🥗 Aliments</a>
                 <a href="#">📖 Recettes</a>
-                <a href="#">📅 Plans</a>
+                <a href="index.php?page=admin_plan_alimentaires">📅 Plans</a>
             </nav>
             <a href="index.php?page=logout" class="logout">🚪 Déconnexion</a>
         </aside>

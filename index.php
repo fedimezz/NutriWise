@@ -7,6 +7,7 @@ require_once 'controllers/AuthController.php';
 require_once 'controllers/UserController.php';
 require_once 'controllers/AdminController.php';
 require_once 'controllers/AlimentController.php';
+require_once 'controllers/PlanAlimentaireController.php';
 
 // On récupère la page demandée, sinon 'home'
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
@@ -48,6 +49,16 @@ switch ($page) {
         $alimentController->details();
         break;
 
+    case 'plan_alimentaires':
+        $planController = new PlanAlimentaireController();
+        $planController->frontList();
+        break;
+
+    case 'plan_alimentaire_details':
+        $planController = new PlanAlimentaireController();
+        $planController->details();
+        break;
+
     // --- BACKEND (ADMIN) ---
     case 'admin_dashboard':
         $admin = new AdminController();
@@ -77,6 +88,26 @@ switch ($page) {
     case 'admin_edit_aliment':
         $alimentController = new AlimentController();
         $alimentController->editAliment();
+        break;
+
+    case 'admin_plan_alimentaires':
+        $planController = new PlanAlimentaireController();
+        $planController->listPlans();
+        break;
+
+    case 'admin_add_plan_alimentaire':
+        $planController = new PlanAlimentaireController();
+        $planController->addPlan();
+        break;
+
+    case 'admin_edit_plan_alimentaire':
+        $planController = new PlanAlimentaireController();
+        $planController->editPlan();
+        break;
+
+    case 'admin_delete_plan_alimentaire':
+        $planController = new PlanAlimentaireController();
+        $planController->deletePlan();
         break;
 
     default:

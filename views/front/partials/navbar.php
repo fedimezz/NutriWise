@@ -16,10 +16,12 @@ $currentPage = $_GET['page'] ?? 'home';
         <?php if($isLoggedIn): ?>
             <a href="index.php?page=aliments" class="nav-link <?php echo $currentPage == 'aliments' ? 'active' : ''; ?>">Aliments</a>
             <a href="index.php?page=recettes" class="nav-link <?php echo $currentPage == 'recettes' ? 'active' : ''; ?>">Recettes</a>
+            <a href="index.php?page=plan_alimentaires" class="nav-link <?php echo $currentPage == 'plan_alimentaires' || $currentPage == 'plan_alimentaire_details' ? 'active' : ''; ?>">Plans</a>
             <a href="index.php?page=suivi" class="nav-link <?php echo $currentPage == 'suivi' ? 'active' : ''; ?>">Suivi</a>
         <?php else: ?>
             <a href="#" class="nav-link disabled" style="opacity:0.5; cursor:not-allowed;" onclick="return false;">Aliments</a>
             <a href="#" class="nav-link disabled" style="opacity:0.5; cursor:not-allowed;" onclick="return false;">Recettes</a>
+            <a href="#" class="nav-link disabled" style="opacity:0.5; cursor:not-allowed;" onclick="return false;">Plans</a>
             <a href="#" class="nav-link disabled" style="opacity:0.5; cursor:not-allowed;" onclick="return false;">Suivi</a>
         <?php endif; ?>
         
