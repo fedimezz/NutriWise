@@ -5,12 +5,17 @@
     <title>Gestion des recettes - NutriWise</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #f5f5f5; }
-        .container { max-width: 1200px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; }
-        h1 { color: #2E7D32; margin-bottom: 20px; }
-        .top-links { margin-bottom: 20px; display: flex; gap: 20px; }
-        .top-links a { color: #4CAF50; text-decoration: none; }
-        table { width: 100%; border-collapse: collapse; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .dashboard { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background: #1B4D1B; color: white; position: fixed; height: 100vh; }
+        .sidebar .logo { padding: 25px 20px; font-size: 24px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar nav a { display: block; padding: 12px 20px; color: rgba(255,255,255,0.8); text-decoration: none; transition: background 0.3s; }
+        .sidebar nav a:hover { background: #2E7D32; }
+        .sidebar nav a.active { background: #4CAF50; }
+        .main-content { flex: 1; margin-left: 280px; padding: 30px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .header h1 { color: #1B4D1B; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
         th { background: #2E7D32; color: white; }
         .btn-add { background: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block; margin-bottom: 20px; }
@@ -25,54 +30,77 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="top-links">
-            <a href="../controller/index.php?area=back">← Dashboard</a> | 
-            <a href="../controller/index.php">Voir le site public</a>
-        </div>
-        
-        <h1>📖 Gestion des recettes</h1>
-        <a href="../controller/index.php?controller=recette&action=create&area=back" class="btn-add">+ Ajouter une recette</a>
-        
-        <?php if(isset($_GET['success'])): ?>
-            <div class="success">Opération réussie !</div>
-        <?php endif; ?>
-        
-        <form method="GET" class="search-box">
-            <input type="hidden" name="controller" value="recette">
-            <input type="hidden" name="action" value="index">
-            <input type="hidden" name="area" value="back">
-            <input type="text" name="search" placeholder="Rechercher une recette..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-            <button type="submit">🔍 Rechercher</button>
-            <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-                <a href="../controller/index.php?controller=recette&action=index&area=back" style="background:#666; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Annuler</a>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo"><span>🌿</span><span>NutriWise</span></div>
+            <nav>
+                <a href="../controller/index.php?area=back">📊 Dashboard</a>
+                <a href="../controller/index.php?controller=aliment&action=index&area=back">🥗 Aliments</a>
+                <a href="../controller/index.php?controller=recette&action=index&area=back" class="active">📖 Recettes</a>
+                <a href="#">👥 Utilisateurs</a>
+                <a href="#">📅 Plans</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <h1>📖 Gestion des recettes</h1>
+                <div class="admin-badge">Admin</div>
+            </div>
+            
+            <a href="../controller/index.php?controller=recette&action=create&area=back" class="btn-add">+ Ajouter une recette</a>
+            
+            <?php if(isset($_GET['success'])): ?>
+                <div class="success">Opération réussie !</div>
             <?php endif; ?>
-        </form>
-        
-        <table>
-            <thead><tr><th>ID</th><th>Titre</th><th>Difficulté</th><th>Saison</th><th>Durée</th><th>Statut</th><th>Score</th><th>Actions</th></tr></thead>
-            <tbody>
-                <?php if(count($recettes) > 0): ?>
-                    <?php foreach($recettes as $r): ?>
-                    <tr>
-                        <td><?= $r['id'] ?></td>
-                        <td><?= htmlspecialchars($r['title']) ?></td>
-                        <td><?= $r['difficulte'] ?></td>
-                        <td><?= $r['saison'] ?></td>
-                        <td><?= $r['duree'] ?> min</td>
-                        <td><span class="<?= $r['statut'] == 'Publié' ? 'badge-published' : 'badge-draft' ?>"><?= $r['statut'] ?></span></td>
-                        <td>⭐ <?= $r['score_durabilite'] ?></td>
-                        <td>
-                            <a href="../controller/index.php?controller=recette&action=edit&id=<?= $r['id'] ?>&area=back" class="btn-edit">✏️ Modifier</a>
-                            <a href="../controller/index.php?controller=recette&action=delete&id=<?= $r['id'] ?>&area=back" class="btn-delete" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr><td colspan="8" style="text-align:center;">Aucune recette trouvée</td></tr>
+            
+            <form method="GET" class="search-box">
+                <input type="hidden" name="controller" value="recette">
+                <input type="hidden" name="action" value="index">
+                <input type="hidden" name="area" value="back">
+                <input type="text" name="search" placeholder="Rechercher une recette..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                <button type="submit">🔍 Rechercher</button>
+                <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
+                    <a href="../controller/index.php?controller=recette&action=index&area=back" style="background:#666; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Annuler</a>
                 <?php endif; ?>
-            </tbody>
-        </table>
+            </form>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Ingrédients</th>
+                        <th>Difficulté</th>
+                        <th>Saison</th>
+                        <th>Durée</th>
+                        <th>Statut</th>
+                        <th>Score</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(count($recettes) > 0): ?>
+                        <?php foreach($recettes as $r): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($r['title']) ?></td>
+                            <td><?= htmlspecialchars($r['aliments_list'] ?? '-') ?></td>
+                            <td><?= $r['difficulte'] ?></td>
+                            <td><?= $r['saison'] ?></td>
+                            <td><?= $r['duree'] ?> min</td>
+                            <td><span class="<?= $r['statut'] == 'Publié' ? 'badge-published' : 'badge-draft' ?>"><?= $r['statut'] ?></span></td>
+                            <td>⭐ <?= $r['score_durabilite'] ?></td>
+                            <td>
+                                <a href="../controller/index.php?controller=recette&action=edit&id=<?= $r['id'] ?>&area=back" class="btn-edit">✏️ Modifier</a>
+                                <a href="../controller/index.php?controller=recette&action=delete&id=<?= $r['id'] ?>&area=back" class="btn-delete" onclick="return confirm('Supprimer ?')">🗑️ Supprimer</a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="8" style="text-align:center;">Aucune recette trouvée</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </main>
     </div>
 </body>
 </html>

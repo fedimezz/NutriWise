@@ -22,7 +22,7 @@ class Aliment {
         $query = "SELECT a.*, c.name as category_name 
                   FROM " . $this->table_name . " a
                   LEFT JOIN categories c ON a.category_id = c.id
-                  ORDER BY a.id DESC";
+                  ORDER BY a.nom ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -34,7 +34,7 @@ class Aliment {
                   FROM " . $this->table_name . " a
                   LEFT JOIN categories c ON a.category_id = c.id
                   WHERE a.nom LIKE :keyword OR c.name LIKE :keyword
-                  ORDER BY a.id DESC";
+                  ORDER BY a.nom ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":keyword", $keyword);
         $stmt->execute();
@@ -67,10 +67,60 @@ class Aliment {
 
     public function validate($data) {
         $errors = [];
-        if(empty($data['nom'])) $errors[] = "Le nom est requis";
-        elseif(strlen($data['nom']) < 2) $errors[] = "Le nom doit contenir au moins 2 caractères";
-        if(empty($data['calories'])) $errors[] = "Les calories sont requises";
-        elseif(!is_numeric($data['calories']) || $data['calories'] < 0) $errors[] = "Les calories doivent être un nombre positif";
+        
+        // Validation du nom
+        if(empty($data['nom'])) {
+            $errors[] = "Le nom est requis";
+        } elseif(strlen($data['nom']) < 2) {
+            $errors[] = "Le nom doit contenir au moins 2 caractères";
+        } elseif(strlen($data['nom']) > 10) {
+            $errors[] = "Le nom ne doit pas dépasser 10 caractères";
+        } elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s\-éèêëïîôûç]+$/", $data['nom'])) {
+            $errors[] = "Le nom ne doit contenir que des lettres, espaces et tirets";
+        }
+        
+        // Validation des calories
+        if(empty($data['calories'])) {
+            $errors[] = "Les calories sont requises";
+        } elseif(!is_numeric($data['calories']) || $data['calories'] < 0) {
+            $errors[] = "Les calories doivent être un nombre positif";
+        } elseif($data['calories'] > 1000) {
+            $errors[] = "Les calories ne peuvent pas dépasser 1000 kcal/100g (valeur réaliste)";
+        }
+        
+        // Validation des protéines
+        if(isset($data['proteins']) && !empty($data['proteins'])) {
+            if(!is_numeric($data['proteins']) || $data['proteins'] < 0) {
+                $errors[] = "Les protéines doivent être un nombre positif";
+            } elseif($data['proteins'] > 100) {
+                $errors[] = "Les protéines ne peuvent pas dépasser 100g/100g";
+            }
+        }
+        
+        // Validation des glucides
+        if(isset($data['glucides']) && !empty($data['glucides'])) {
+            if(!is_numeric($data['glucides']) || $data['glucides'] < 0) {
+                $errors[] = "Les glucides doivent être un nombre positif";
+            } elseif($data['glucides'] > 100) {
+                $errors[] = "Les glucides ne peuvent pas dépasser 100g/100g";
+            }
+        }
+        
+        // Validation des lipides
+        if(isset($data['lipids']) && !empty($data['lipids'])) {
+            if(!is_numeric($data['lipids']) || $data['lipids'] < 0) {
+                $errors[] = "Les lipides doivent être un nombre positif";
+            } elseif($data['lipids'] > 100) {
+                $errors[] = "Les lipides ne peuvent pas dépasser 100g/100g";
+            }
+        }
+        
+        // Vérification du total (optionnelle)
+        $total = ($data['proteins'] ?? 0) + ($data['glucides'] ?? 0) + ($data['lipids'] ?? 0);
+        if($total > 100) {
+            $errors[] = "Le total des protéines, glucides et lipides ne peut pas dépasser 100g/100g";
+        }
+        
         return $errors;
     }
 
@@ -131,6 +181,14 @@ class Aliment {
 
     public function getCategories() {
         $query = "SELECT * FROM categories ORDER BY name";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Nouvelle méthode pour récupérer tous les aliments (pour les recettes)
+    public function getAllForSelect() {
+        $query = "SELECT id, nom FROM " . $this->table_name . " ORDER BY nom ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

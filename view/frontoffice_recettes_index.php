@@ -18,20 +18,52 @@
         .btn-register { background: #4CAF50; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
         .btn-register:hover { background: #2E7D32; }
         h1 { color: #2E7D32; margin-bottom: 10px; }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .btn-propose {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-propose:hover {
+            background: #2E7D32;
+            transform: translateY(-2px);
+        }
         .search-box { margin: 20px 0; display: flex; gap: 10px; }
         .search-box input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
         .search-box button { background: #2E7D32; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; }
         .recipes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
-        .recipe-card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .recipe-card:hover { transform: translateY(-5px); }
         .recipe-card h3 { color: #2E7D32; margin-bottom: 10px; }
         .recipe-meta { display: flex; gap: 15px; font-size: 13px; color: #666; margin: 10px 0; }
+        .recipe-ingredients { font-size: 13px; color: #888; margin: 10px 0; font-style: italic; }
         .recipe-score { color: #f9a825; margin: 10px 0; }
         .btn-detail { background: #4CAF50; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px; }
         .footer { text-align: center; margin-top: 40px; padding: 20px; color: #666; }
         .back-link { margin: 20px 0; }
         .back-link a { color: #4CAF50; text-decoration: none; }
         .no-results { text-align: center; padding: 40px; color: #666; }
-        @media (max-width: 768px) { .navbar { flex-direction: column; text-align: center; } }
+        .success-message { background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #28a745; }
+        @media (max-width: 768px) { 
+            .navbar { flex-direction: column; text-align: center; }
+            .header-section { flex-direction: column; text-align: center; }
+            .btn-propose { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -54,8 +86,21 @@
             <a href="../controller/index.php">← Retour à l'accueil</a>
         </div>
 
-        <h1>🍳 Nos recettes durables</h1>
-        <p>Découvrez des recettes saines, locales et respectueuses de l'environnement.</p>
+        <div class="header-section">
+            <div>
+                <h1>🍳 Nos recettes durables</h1>
+                <p>Découvrez des recettes saines, locales et respectueuses de l'environnement.</p>
+            </div>
+            <a href="../controller/index.php?controller=recette&action=createUser&area=front" class="btn-propose">
+                ➕ Proposer une recette
+            </a>
+        </div>
+
+        <?php if(isset($_GET['success']) && $_GET['success'] == 'created'): ?>
+            <div class="success-message">
+                ✅ Merci ! Votre recette a été soumise avec succès. Elle sera publiée après validation par notre équipe.
+            </div>
+        <?php endif; ?>
 
         <form method="GET" class="search-box">
             <input type="hidden" name="controller" value="recette">
@@ -82,6 +127,11 @@
                     <span><?= $r['difficulte'] ?></span>
                     <span><?= $r['saison'] ?></span>
                 </div>
+                <?php if(isset($r['aliments_list']) && !empty($r['aliments_list'])): ?>
+                <div class="recipe-ingredients">
+                    🥗 Ingrédients : <?= htmlspecialchars(substr($r['aliments_list'], 0, 60)) ?>...
+                </div>
+                <?php endif; ?>
                 <div class="recipe-score">⭐ Score durabilité : <?= $r['score_durabilite'] ?>/5</div>
                 <p><?= htmlspecialchars(substr($r['description'] ?? '', 0, 100)) ?>...</p>
                 <a href="../controller/index.php?controller=recette&action=show&id=<?= $r['id'] ?>" class="btn-detail">Voir la recette →</a>
