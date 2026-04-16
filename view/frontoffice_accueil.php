@@ -7,17 +7,17 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f8f0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
         
-        .navbar { background: #1B4D1B; padding: 15px 30px; border-radius: 12px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .navbar .logo { color: white; font-size: 24px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
-        .nav-links a { color: white; text-decoration: none; padding: 8px 16px; border-radius: 8px; transition: background 0.3s; cursor: pointer; }
+        .navbar { background: #1B4D1B; padding: 12px 20px; border-radius: 12px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 10px; width: 100%; }
+        .navbar .logo { color: white; font-size: 20px; font-weight: bold; white-space: nowrap; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: nowrap; }
+        .nav-links a { color: white; text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: background 0.3s; font-weight: normal; font-size: 14px; white-space: nowrap; }
         .nav-links a:hover, .nav-links a.active { background: #4CAF50; }
-        .auth-buttons { display: flex; gap: 10px; }
-        .btn-login { background: transparent; border: 1px solid white; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
+        .auth-buttons { display: flex; gap: 6px; flex-wrap: nowrap; }
+        .btn-login { background: transparent; border: 1px solid white; color: white; padding: 6px 12px; border-radius: 25px; text-decoration: none; font-weight: normal; font-size: 13px; white-space: nowrap; }
         .btn-login:hover { background: white; color: #1B4D1B; }
-        .btn-register { background: #4CAF50; color: white; padding: 8px 20px; border-radius: 25px; text-decoration: none; cursor: pointer; }
+        .btn-register { background: #4CAF50; color: white; padding: 6px 12px; border-radius: 25px; text-decoration: none; font-weight: normal; font-size: 13px; white-space: nowrap; }
         .btn-register:hover { background: #2E7D32; }
         
         .hero { display: flex; align-items: center; gap: 50px; padding: 50px 0; flex-wrap: wrap; }
@@ -33,11 +33,11 @@
         .feature-card { background: white; border-radius: 20px; padding: 30px; flex: 1; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer; }
         .feature-card:hover { transform: translateY(-5px); }
         .feature-icon { font-size: 48px; margin-bottom: 20px; }
-        .feature-title { font-size: 20px; color: #1B4D1B; margin-bottom: 15px; }
+        .feature-title { font-size: 20px; color: #1B4D1B; margin-bottom: 15px; font-weight: bold; }
         .feature-desc { color: #666; line-height: 1.6; }
         
         .admin-access { text-align: center; margin: 40px 0; padding: 20px; background: #e8f5e9; border-radius: 12px; }
-        .admin-access a { color: #1B4D1B; text-decoration: none; font-weight: bold; margin: 0 10px; cursor: pointer; }
+        .admin-access a { color: #1B4D1B; text-decoration: none; font-weight: bold; margin: 0 10px; }
         .admin-access a:hover { text-decoration: underline; }
         
         .footer { text-align: center; margin-top: 60px; padding: 30px; border-top: 1px solid #ddd; color: #666; }
@@ -46,17 +46,20 @@
             .hero { flex-direction: column; text-align: center; }
             .hero-title { font-size: 32px; }
             .navbar { flex-direction: column; text-align: center; }
+            .nav-links, .auth-buttons { flex-wrap: wrap; justify-content: center; }
+            .features { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="navbar">
-            <div class="logo"><span>🌿</span><span>NutriWise</span></div>
+            <div class="logo">🌿 NutriWise</div>
             <div class="nav-links">
                 <a href="../controller/index.php" class="active">Accueil</a>
                 <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
                 <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
+                <a href="../controller/index.php?controller=recommandation&action=index">Recommandations</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">

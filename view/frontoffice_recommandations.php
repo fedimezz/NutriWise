@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Nos recettes - NutriWise</title>
+    <title>Recommandations - NutriWise</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f8f0; }
@@ -25,15 +25,17 @@
         h1 { color: #2E7D32; margin-bottom: 10px; font-size: 28px; }
         .subtitle { color: #666; margin-bottom: 30px; font-size: 16px; }
         
-        .search-box { margin: 20px 0; display: flex; gap: 10px; }
-        .search-box input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
-        .search-box button { background: #2E7D32; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .section-title { font-size: 22px; color: #2E7D32; margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 3px solid #4CAF50; font-weight: bold; }
         
-        .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 20px; }
+        .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 10px; }
         .recipe-card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
         .recipe-card:hover { transform: translateY(-5px); }
         .recipe-card h3 { color: #2E7D32; margin-bottom: 10px; font-size: 18px; }
-        .recipe-meta { display: flex; gap: 15px; font-size: 13px; color: #666; margin: 10px 0; }
+        .recipe-meta { display: flex; gap: 15px; font-size: 13px; color: #666; margin: 10px 0; flex-wrap: wrap; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+        .badge-saison { background: #e8f5e9; color: #2E7D32; }
+        .badge-top { background: #ffd700; color: #333; }
+        .recipe-card p { color: #555; font-size: 13px; line-height: 1.4; margin: 10px 0; }
         .btn-detail { background: #4CAF50; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px; font-size: 13px; font-weight: bold; transition: background 0.3s; }
         .btn-detail:hover { background: #2E7D32; }
         
@@ -43,7 +45,6 @@
             .navbar { flex-direction: column; text-align: center; }
             .nav-links, .auth-buttons { flex-wrap: wrap; justify-content: center; }
             .recipes-grid { grid-template-columns: 1fr; }
-            .search-box { flex-direction: column; }
         }
     </style>
 </head>
@@ -54,8 +55,8 @@
             <div class="nav-links">
                 <a href="../controller/index.php">Accueil</a>
                 <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
-                <a href="../controller/index.php?controller=recette&action=index&area=front" class="active">Recettes</a>
-                <a href="../controller/index.php?controller=recommandation&action=index">Recommandations</a>
+                <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
+                <a href="../controller/index.php?controller=recommandation&action=index" class="active">Recommandations</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
@@ -68,34 +69,57 @@
             <a href="../controller/index.php">← Retour à l'accueil</a>
         </div>
 
-        <h1>🍳 Nos recettes durables</h1>
-        <p class="subtitle">Découvrez des recettes saines, locales et respectueuses de l'environnement.</p>
+        <h1>🎯 Nos recommandations</h1>
+        <p class="subtitle">Découvrez les meilleures recettes du moment, selon la saison et les notes des utilisateurs</p>
 
-        <form method="GET" class="search-box">
-            <input type="hidden" name="controller" value="recette">
-            <input type="hidden" name="action" value="index">
-            <input type="hidden" name="area" value="front">
-            <input type="text" name="search" placeholder="Rechercher une recette..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-            <button type="submit">🔍 Rechercher</button>
-            <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-                <a href="../controller/index.php?controller=recette&action=index&area=front" style="background:#666; color:white; padding:12px 25px; text-decoration:none; border-radius:5px;">Annuler</a>
-            <?php endif; ?>
-        </form>
-
+        <?php if(count($recommandations) > 0): ?>
+        
+        <div class="section-title">🌸 Recettes de saison</div>
         <div class="recipes-grid">
-            <?php foreach($recettes as $r): ?>
+            <?php 
+            $saisonCount = 0;
+            foreach($recommandations as $r): 
+                $saisonCount++;
+                if($saisonCount > 3) break;
+            ?>
             <div class="recipe-card">
                 <h3><?= htmlspecialchars($r['title']) ?></h3>
                 <div class="recipe-meta">
                     <span>⏱️ <?= $r['duree'] ?> min</span>
                     <span><?= $r['difficulte'] ?></span>
-                    <span>🌸 <?= $r['saison'] ?></span>
+                    <span class="badge badge-saison"><?= $r['saison'] ?></span>
                 </div>
                 <p><?= htmlspecialchars(substr($r['description'] ?? '', 0, 100)) ?>...</p>
                 <a href="../controller/index.php?controller=recette&action=show&id=<?= $r['id'] ?>" class="btn-detail">Voir la recette →</a>
             </div>
             <?php endforeach; ?>
         </div>
+
+        <div class="section-title">⭐ Top recettes notées</div>
+        <div class="recipes-grid">
+            <?php 
+            $topCount = 0;
+            foreach($recommandations as $r): 
+                $topCount++;
+                if($topCount <= 3) continue;
+                if($topCount > 6) break;
+            ?>
+            <div class="recipe-card">
+                <h3><?= htmlspecialchars($r['title']) ?></h3>
+                <div class="recipe-meta">
+                    <span>⏱️ <?= $r['duree'] ?> min</span>
+                    <span><?= $r['difficulte'] ?></span>
+                    <span class="badge badge-top">⭐ <?= round($r['avg_rating'] ?? 0, 1) ?></span>
+                </div>
+                <p><?= htmlspecialchars(substr($r['description'] ?? '', 0, 100)) ?>...</p>
+                <a href="../controller/index.php?controller=recette&action=show&id=<?= $r['id'] ?>" class="btn-detail">Voir la recette →</a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <?php else: ?>
+        <p style="text-align: center; padding: 40px;">Aucune recette disponible pour le moment.</p>
+        <?php endif; ?>
 
         <div class="footer">
             <p>© 2025 NutriWise - Nutrition intelligente et durable</p>
