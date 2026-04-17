@@ -23,19 +23,21 @@
         .back-link a { color: #4CAF50; text-decoration: none; font-weight: bold; }
         
         h1 { color: #2E7D32; margin-bottom: 10px; font-size: 28px; }
+        .subtitle { color: #666; margin-bottom: 20px; }
         
         .recipe-form { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
         input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; }
         button { background: #4CAF50; color: white; padding: 12px 20px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; }
         button:hover { background: #2E7D32; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
         .btn-back { background: #666; text-decoration: none; color: white; padding: 12px 20px; border-radius: 5px; display: inline-block; margin-top: 20px; text-align: center; width: 100%; }
         .btn-back:hover { background: #555; }
         .error { background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
         .success { background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
-        .aliments-list { max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-top: 5px; }
+        .aliments-list { max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin-top: 5px; background: #f9f9f9; }
         .aliment-checkbox { margin: 5px 0; }
-        .aliment-checkbox label { margin-left: 8px; font-weight: normal; display: inline; }
+        .aliment-checkbox label { margin-left: 8px; font-weight: normal; display: inline; cursor: pointer; }
         .required:after { content: " *"; color: red; }
         .info-message { background: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #17a2b8; }
         
@@ -56,6 +58,7 @@
                 <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
                 <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
                 <a href="../controller/index.php?controller=recommandation&action=index">Recommandations</a>
+                <a href="../controller/index.php?controller=recette&action=createUser&area=front" class="active">Proposer</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
@@ -69,7 +72,7 @@
         </div>
 
         <h1>🍳 Proposer une recette</h1>
-        <p>Partagez votre recette avec la communauté NutriWise !</p>
+        <p class="subtitle">Partagez votre recette avec la communauté NutriWise !</p>
 
         <div class="info-message">
             💡 Votre recette sera soumise à validation par notre équipe avant publication.
@@ -86,7 +89,7 @@
             
             <?php if(isset($_GET['success']) && $_GET['success'] == 'created'): ?>
                 <div class="success">
-                    ✅ Merci ! Votre recette a été soumise avec succès.
+                    ✅ Merci ! Votre recette a été soumise avec succès. Elle sera publiée après validation.
                 </div>
             <?php endif; ?>
             
@@ -94,7 +97,7 @@
                 <input type="hidden" name="area" value="front">
                 
                 <label class="required">Titre de la recette</label>
-                <input type="text" name="title" value="<?= htmlspecialchars($_POST['title'] ?? '') ?>" required maxlength="150">
+                <input type="text" name="title" value="<?= htmlspecialchars($_POST['title'] ?? '') ?>" required maxlength="150" placeholder="Ex: Tarte aux pommes maison">
                 
                 <label>Description (optionnel)</label>
                 <textarea name="description" rows="3" placeholder="Décrivez brièvement votre recette..."><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
@@ -118,7 +121,7 @@
                     <option value="Ete" <?= ($_POST['saison'] ?? '') == 'Ete' ? 'selected' : '' ?>>Ete</option>
                     <option value="Automne" <?= ($_POST['saison'] ?? '') == 'Automne' ? 'selected' : '' ?>>Automne</option>
                     <option value="Hiver" <?= ($_POST['saison'] ?? '') == 'Hiver' ? 'selected' : '' ?>>Hiver</option>
-                    <option value="Toute l annee" <?= ($_POST['saison'] ?? '') == 'Toute l annee' ? 'selected' : '' ?>>Toute l annee</option>
+                    <option value="Toute l annee" <?= ($_POST['saison'] ?? '') == 'Toute l annee' ? 'selected' : '' ?>>Toute l'année</option>
                 </select>
                 
                 <label class="required">Ingrédients (sélectionnez les aliments utilisés)</label>
@@ -138,6 +141,7 @@
                         </p>
                     <?php endif; ?>
                 </div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">💡 Vous pouvez sélectionner plusieurs ingrédients</p>
                 
                 <button type="submit" <?= (!isset($aliments) || count($aliments) == 0) ? 'disabled' : '' ?>>Soumettre ma recette</button>
             </form>

@@ -22,6 +22,29 @@
         .back-link { margin: 20px 0; }
         .back-link a { color: #4CAF50; text-decoration: none; font-weight: bold; }
         
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .btn-propose {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn-propose:hover {
+            background: #2E7D32;
+            transform: translateY(-2px);
+        }
+        
         h1 { color: #2E7D32; margin-bottom: 10px; font-size: 28px; }
         .subtitle { color: #666; margin-bottom: 30px; font-size: 16px; }
         
@@ -44,6 +67,8 @@
             .nav-links, .auth-buttons { flex-wrap: wrap; justify-content: center; }
             .recipes-grid { grid-template-columns: 1fr; }
             .search-box { flex-direction: column; }
+            .header-section { flex-direction: column; text-align: center; }
+            .btn-propose { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -68,8 +93,15 @@
             <a href="../controller/index.php">← Retour à l'accueil</a>
         </div>
 
-        <h1>🍳 Nos recettes durables</h1>
-        <p class="subtitle">Découvrez des recettes saines, locales et respectueuses de l'environnement.</p>
+        <div class="header-section">
+            <div>
+                <h1>🍳 Nos recettes durables</h1>
+                <p class="subtitle">Découvrez des recettes saines, locales et respectueuses de l'environnement.</p>
+            </div>
+            <a href="../controller/index.php?controller=recette&action=createUser&area=front" class="btn-propose">
+                ➕ Proposer une recette
+            </a>
+        </div>
 
         <form method="GET" class="search-box">
             <input type="hidden" name="controller" value="recette">
