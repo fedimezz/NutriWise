@@ -73,8 +73,8 @@ class Aliment {
             $errors[] = "Le nom est requis";
         } elseif(strlen($data['nom']) < 2) {
             $errors[] = "Le nom doit contenir au moins 2 caractères";
-        } elseif(strlen($data['nom']) > 10) {
-            $errors[] = "Le nom ne doit pas dépasser 10 caractères";
+        } elseif(strlen($data['nom']) > 15) {
+            $errors[] = "Le nom ne doit pas dépasser 15 caractères";
         } elseif(!preg_match("/^[a-zA-ZÀ-ÿ\s\-éèêëïîôûç]+$/", $data['nom'])) {
             $errors[] = "Le nom ne doit contenir que des lettres, espaces et tirets";
         }

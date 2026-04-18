@@ -30,6 +30,25 @@
             flex-wrap: wrap;
             gap: 15px;
         }
+        .buttons-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .btn-recommandations {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn-recommandations:hover {
+            background: #2E7D32;
+            transform: translateY(-2px);
+        }
         .btn-propose {
             background: #4CAF50;
             color: white;
@@ -68,7 +87,8 @@
             .recipes-grid { grid-template-columns: 1fr; }
             .search-box { flex-direction: column; }
             .header-section { flex-direction: column; text-align: center; }
-            .btn-propose { width: 100%; text-align: center; }
+            .buttons-group { flex-direction: column; width: 100%; }
+            .btn-recommandations, .btn-propose { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -80,7 +100,6 @@
                 <a href="../controller/index.php">Accueil</a>
                 <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
                 <a href="../controller/index.php?controller=recette&action=index&area=front" class="active">Recettes</a>
-                <a href="../controller/index.php?controller=recommandation&action=index">Recommandations</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
@@ -98,9 +117,14 @@
                 <h1>🍳 Nos recettes durables</h1>
                 <p class="subtitle">Découvrez des recettes saines, locales et respectueuses de l'environnement.</p>
             </div>
-            <a href="../controller/index.php?controller=recette&action=createUser&area=front" class="btn-propose">
-                ➕ Proposer une recette
-            </a>
+            <div class="buttons-group">
+                <a href="../controller/index.php?controller=recommandation&action=index" class="btn-recommandations">
+                    🎯 Recommandations
+                </a>
+                <a href="../controller/index.php?controller=recette&action=createUser&area=front" class="btn-propose">
+                    ➕ Proposer une recette
+                </a>
+            </div>
         </div>
 
         <form method="GET" class="search-box">

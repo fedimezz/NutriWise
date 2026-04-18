@@ -66,7 +66,6 @@
                 <a href="../controller/index.php">Accueil</a>
                 <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
                 <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
-                <a href="../controller/index.php?controller=recommandation&action=index">Recommandations</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
@@ -117,11 +116,11 @@
             <div class="info-section">
                 <h3>📊 Détails nutritionnels (pour 100g)</h3>
                 <table class="nutrition-table">
-                    <tr><td>🔥 Calories</td><td><?= $aliment['calories'] ?> kcal</td></tr>
-                    <tr><td>🥩 Protéines</td><td><?= $aliment['proteins'] ?> g</td></tr>
-                    <tr><td>🍚 Glucides</td><td><?= $aliment['glucides'] ?> g</td></tr>
-                    <tr><td>🧈 Lipides</td><td><?= $aliment['lipids'] ?> g</td></tr>
-                    <tr><td>🌾 Fibres</td><td><?= $aliment['fibres'] ?? 0 ?> g</td></tr>
+                    <tr><td🔥 Calories</td><td><?= $aliment['calories'] ?> kcal</td></tr>
+                    <tr><td🥩 Protéines</td><td><?= $aliment['proteins'] ?> g</td></tr>
+                    <tr><td🍚 Glucides</td><td><?= $aliment['glucides'] ?> g</td></tr>
+                    <tr><td🧈 Lipides</td><td><?= $aliment['lipids'] ?> g</td></tr>
+                    <tr><td🌾 Fibres</td><td><?= $aliment['fibres'] ?? 0 ?> g</td></tr>
                 </table>
             </div>
 

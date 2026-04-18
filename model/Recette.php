@@ -92,8 +92,8 @@ class Recette {
             $errors[] = "Le titre est requis";
         } elseif(strlen($data['title']) < 3) {
             $errors[] = "Le titre doit contenir au moins 3 caractères";
-        } elseif(strlen($data['title']) > 15) {
-            $errors[] = "Le titre ne doit pas dépasser 15 caractères";
+        } elseif(strlen($data['title']) > 30) {
+            $errors[] = "Le titre ne doit pas dépasser 30 caractères";
         } elseif(!preg_match("/^[a-zA-ZÀ-ÿ0-9\s\-éèêëïîôûç'’]+$/", $data['title'])) {
             $errors[] = "Le titre contient des caractères non autorisés";
         }

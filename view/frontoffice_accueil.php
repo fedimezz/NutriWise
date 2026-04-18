@@ -59,7 +59,6 @@
                 <a href="../controller/index.php" class="active">Accueil</a>
                 <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
                 <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
-                <a href="../controller/index.php?controller=recommandation&action=index">Recommandations</a>
                 <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
