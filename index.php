@@ -7,7 +7,8 @@ require_once 'controllers/AuthController.php';
 require_once 'controllers/UserController.php';
 require_once 'controllers/AdminController.php';
 require_once 'controllers/AlimentController.php';
-require_once 'controllers/PlanAlimentaireController.php';
+require_once 'controllers/MenuController.php';
+require_once 'controllers/PlanningController.php';
 
 // On récupère la page demandée, sinon 'home'
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
@@ -49,14 +50,19 @@ switch ($page) {
         $alimentController->details();
         break;
 
-    case 'plan_alimentaires':
-        $planController = new PlanAlimentaireController();
-        $planController->frontList();
+    case 'nutrition_plans':
+        $planningController = new PlanningController();
+        $planningController->frontList();
         break;
 
-    case 'plan_alimentaire_details':
-        $planController = new PlanAlimentaireController();
-        $planController->details();
+    case 'nutrition_plan_details':
+        $planningController = new PlanningController();
+        $planningController->details();
+        break;
+
+    case 'menu_details':
+        $menuController = new MenuController();
+        $menuController->details();
         break;
 
     // --- BACKEND (ADMIN) ---
@@ -90,24 +96,44 @@ switch ($page) {
         $alimentController->editAliment();
         break;
 
-    case 'admin_plan_alimentaires':
-        $planController = new PlanAlimentaireController();
-        $planController->listPlans();
+    case 'admin_plannings':
+        $planningController = new PlanningController();
+        $planningController->listPlannings();
         break;
 
-    case 'admin_add_plan_alimentaire':
-        $planController = new PlanAlimentaireController();
-        $planController->addPlan();
+    case 'admin_add_planning':
+        $planningController = new PlanningController();
+        $planningController->addPlanning();
         break;
 
-    case 'admin_edit_plan_alimentaire':
-        $planController = new PlanAlimentaireController();
-        $planController->editPlan();
+    case 'admin_edit_planning':
+        $planningController = new PlanningController();
+        $planningController->editPlanning();
         break;
 
-    case 'admin_delete_plan_alimentaire':
-        $planController = new PlanAlimentaireController();
-        $planController->deletePlan();
+    case 'admin_delete_planning':
+        $planningController = new PlanningController();
+        $planningController->deletePlanning();
+        break;
+
+    case 'admin_menus':
+        $menuController = new MenuController();
+        $menuController->listMenus();
+        break;
+
+    case 'admin_add_menu':
+        $menuController = new MenuController();
+        $menuController->addMenu();
+        break;
+
+    case 'admin_edit_menu':
+        $menuController = new MenuController();
+        $menuController->editMenu();
+        break;
+
+    case 'admin_delete_menu':
+        $menuController = new MenuController();
+        $menuController->deleteMenu();
         break;
 
     default:

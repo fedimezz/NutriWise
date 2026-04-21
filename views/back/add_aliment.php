@@ -6,7 +6,7 @@
     <title>Ajouter un aliment - NutriWise</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- On réutilise votre CSS des formulaires -->
-    <link rel="stylesheet" href="./assets/css/edit_user.css">
+    <link rel="stylesheet" href="views/assets/css/edit_user.css">
 </head>
 <body>
     <div class="dashboard-container">

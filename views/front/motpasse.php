@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mot de passe oublié - NutriWise</title>
-    <link rel="stylesheet" href="./assets/css/motpasse.css">
+    <link rel="stylesheet" href="views/assets/css/motpasse.css">
 </head>
 <body>
     <div class="container">

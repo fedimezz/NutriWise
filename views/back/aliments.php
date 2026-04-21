@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des aliments - NutriWise</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/users.css">
+    <link rel="stylesheet" href="views/assets/css/users.css">
 </head>
 <body>
     <div class="dashboard-container">
