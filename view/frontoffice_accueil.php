@@ -55,11 +55,11 @@
     <div class="container">
         <nav class="navbar">
             <div class="logo">🌿 NutriWise</div>
-            <div class="nav-links">
-                <a href="../controller/index.php" class="active">Accueil</a>
-                <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
-                <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
-                <a href="#">Suivi</a>
+           <div class="nav-links">
+              <a href="../controller/index.php">Accueil</a>
+              <a href="../controller/index.php?controller=aliment&action=index&area=front">Aliments</a>
+              <a href="../controller/index.php?controller=recette&action=index&area=front">Recettes</a>
+              <a href="#">Suivi</a>
             </div>
             <div class="auth-buttons">
                 <a href="#" class="btn-login">Connexion</a>

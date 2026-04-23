@@ -60,6 +60,14 @@ if($controller_name == 'aliment') {
     } else {
         echo "Action non trouvée : " . $action;
     }
+} elseif($controller_name == 'statistique') {  // ← AJOUTER CETTE ROUTE
+    $controller = new StatistiqueController();
+    if(method_exists($controller, $action)) {
+        if($id) $controller->$action($id);
+        else $controller->$action();
+    } else {
+        echo "Action non trouvée : " . $action;
+    }
 } else {
     if($area == 'back') {
         require_once __DIR__ . '/../view/backoffice_dashboard.php';

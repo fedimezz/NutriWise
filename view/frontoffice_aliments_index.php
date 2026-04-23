@@ -81,7 +81,12 @@
 
         <h1>🥗 Notre base de données alimentaire</h1>
         <p class="subtitle">Découvrez la valeur nutritionnelle et l'impact environnemental de chaque aliment.</p>
-
+        <div style="margin: 20px 0; text-align: right;">
+          <a href="../controller/index.php?controller=statistique&action=front" 
+            style="background: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold;">
+            📊 Voir les statistiques des aliments
+          </a>
+        </div>
         <form method="GET" class="search-box">
             <input type="hidden" name="controller" value="aliment">
             <input type="hidden" name="action" value="index">

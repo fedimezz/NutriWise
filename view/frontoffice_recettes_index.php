@@ -124,6 +124,9 @@
                 <a href="../controller/index.php?controller=recette&action=createUser&area=front" class="btn-propose">
                     ➕ Proposer une recette
                 </a>
+                <a href="../controller/index.php?controller=statistique&action=front" class="btn-recommandations">
+                 📊 Statistiques
+                </a>
             </div>
         </div>
 
