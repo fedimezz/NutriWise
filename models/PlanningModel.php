@@ -76,7 +76,7 @@ class PlanningModel {
 
         $planningId = $this->conn->lastInsertId();
         $this->syncPlanningMenus($planningId, $menuIds);
-        return true;
+        return $planningId;  // Retourner l'ID du planning créé
     }
 
     public function updatePlanning($id, $name, $description, $startDate, $endDate, $userId, $status, $menuIds = []) {

@@ -19,6 +19,7 @@
                 <a href="#">📖 Recettes</a>
                 <a href="#">📅 Plans alimentaires</a>
             </nav>
+            <a href="index.php?page=home" class="back-to-site">← Retour au site</a>
             <a href="index.php?page=logout" class="logout">🚪 Déconnexion</a>
         </aside>
 

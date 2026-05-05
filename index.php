@@ -101,6 +101,11 @@ switch ($page) {
         $planningController->listPlannings();
         break;
 
+    case 'admin_planning_details':
+        $planningController = new PlanningController();
+        $planningController->adminDetails();
+        break;
+
     case 'admin_add_planning':
         $planningController = new PlanningController();
         $planningController->addPlanning();
@@ -116,6 +121,8 @@ switch ($page) {
         $planningController->deletePlanning();
         break;
 
+    // Les menus sont gérés via les plannings, pas séparément
+    /*
     case 'admin_menus':
         $menuController = new MenuController();
         $menuController->listMenus();
@@ -135,6 +142,7 @@ switch ($page) {
         $menuController = new MenuController();
         $menuController->deleteMenu();
         break;
+    */
 
     default:
         header("HTTP/1.0 404 Not Found");

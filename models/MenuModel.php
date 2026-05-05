@@ -57,7 +57,7 @@ class MenuModel {
 
         $menuId = $this->conn->lastInsertId();
         $this->syncMenuMeals($menuId, $meals);
-        return true;
+        return $menuId;  // Retourner l'ID du menu créé
     }
 
     public function updateMenu($id, $title, $goal, $caloriesTarget, $assignedTo, $isActive, $meals = []) {

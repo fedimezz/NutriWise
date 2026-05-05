@@ -14,9 +14,9 @@
                 <a href="index.php?page=admin_dashboard">📊 Tableau de bord</a>
                 <a href="index.php?page=admin_users">👥 Utilisateurs</a>
                 <a href="index.php?page=admin_aliments">🥗 Aliments</a>
-                <a href="index.php?page=admin_menus">📋 Menus</a>
                 <a href="index.php?page=admin_plannings" class="active">🗓️ Plannings</a>
             </nav>
+            <a href="index.php?page=home" class="back-to-site">← Retour au site</a>
             <a href="index.php?page=logout" class="logout">🚪 Déconnexion</a>
         </aside>
 
@@ -64,6 +64,7 @@
                                     <td><?= intval($planning['menu_count']) ?></td>
                                     <td><?= htmlspecialchars($planning['status']) ?></td>
                                     <td class="action-buttons">
+                                        <a href="index.php?page=admin_planning_details&id=<?= $planning['id'] ?>" class="btn-icon" title="Voir">👁️</a>
                                         <a href="index.php?page=admin_edit_planning&id=<?= $planning['id'] ?>" class="btn-icon">✏️</a>
                                         <a href="index.php?page=admin_delete_planning&id=<?= $planning['id'] ?>" class="btn-icon" onclick="return confirm('Voulez-vous vraiment supprimer ce planning ?');">🗑️</a>
                                     </td>
